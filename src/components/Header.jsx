@@ -20,8 +20,8 @@ export default function Header() {
           <Link to="/dashboard" className="hover:text-gray-300">
             Dashboard
           </Link>
-          <Link to="/create" className="hover:text-gray-300">
-            Create
+          <Link to="/calendar" className="hover:text-gray-300">
+            calendar
           </Link>
         </nav>
         <button

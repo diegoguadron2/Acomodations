@@ -5,10 +5,10 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard.jsx";
-import Protected from "./routes/protected.jsx";
+import Protected from "./routes/Protected.jsx";
 import { Provider } from "./auth/AuthProvider.jsx";
 import { ProtectedLayout } from "./components/ProtectedLayout.jsx";
-import CreateAcc from "./components/Create.jsx";
+import Calendar from "./components/Calendar.jsx";
 
 //Creacion de rutas
 const router = createBrowserRouter([
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/create",
-        element: <CreateAcc />,
+        path: "/calendar",
+        element: <Calendar />,
       }
     ],
   },

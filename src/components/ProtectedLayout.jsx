@@ -10,9 +10,11 @@ export function ProtectedLayout({ children }) {
   }
 
   return (
-    <div className="app-layout">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="main-content">{children}</main>
+      <main className="main-content flex-grow  dark:bg-gray-900" >
+        {children}
+      </main>
     </div>
   );
 }
