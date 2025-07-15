@@ -12,9 +12,17 @@ export default function Dashboard() {
   const [editMode, setEditMode] = useState(false);
   const [editAcc, setEditAcc] = useState(null);
   const [createMode, setCreateMode] = useState(false);
-  const [newAcc, setNewAcc] = useState({ name: "", description: "", address: "" });
+  const [newAcc, setNewAcc] = useState({
+    name: "",
+    description: "",
+    address: "",
+  });
 
-  const [toast, setToast] = useState({ show: false, message: "", type: "success" });
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
 
   const accRef = useRef(null);
   const bookRef = useRef(null);
@@ -79,12 +87,13 @@ export default function Dashboard() {
         {!loading && accommodations.length > 0 && (
           <div className="mt-8 relative">
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-2xl font-bold dark:text-white">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400 py-3 tracking-tight drop-shadow-lg">
                 Alojamientos
               </h1>
               <button
                 onClick={handleNewAccommodation}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center gap-2"
+                className="flex items-center justify-center hover:bg-blue-700 bg-blue-600 p-2 sm:px-4 sm:py-1.5 rounded-md transition-colors"
+                aria-label="Nuevo alojamiento"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +109,7 @@ export default function Dashboard() {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                Nuevo alojamiento
+                <span className="hidden sm:inline ml-2">Nuevo alojamiento</span>
               </button>
             </div>
             <div className="border-b-2 border-gray-200 dark:border-gray-700 mb-6"></div>
@@ -132,67 +141,66 @@ export default function Dashboard() {
                 {accommodations.map((item, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-64 dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200 flex flex-col"
+                    className="flex-shrink-0 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 flex flex-col transform hover:-translate-y-1"
                   >
                     {item.image && (
-                      <img
-                        src={item.image}
-                        alt={item.name || "Alojamiento"}
-                        className="w-full h-48 object-cover"
-                      />
+                      <div className="relative overflow-hidden h-56">
+                        <img
+                          src={item.image}
+                          alt={item.name || "Alojamiento"}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
                     )}
-                    <div className="p-4 flex flex-col flex-1">
-                      <h2
-                        className="text-lg font-semibold mb-1 line-clamp-1 dark:text-white"
-                        title={item.name || "Alojamiento sin nombre"}
-                      >
-                        {item.name || "Alojamiento sin nombre"}
-                      </h2>
-                      <p
-                        className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2"
-                        title={item.description || "Sin descripción"}
-                      >
-                        {item.description || "Sin descripción"}
-                      </p>
-                      <div className="flex justify-end space-x-2 mt-auto pt-4">
-                        {/* Icono Editar */}
+
+                    <div className="p-5 flex flex-col flex-1">
+                      <div className="mb-3">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white line-clamp-1">
+                          {item.name || "Alojamiento sin nombre"}
+                        </h2>
+                        <p className="text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+                          {item.description || "Sin descripción"}
+                        </p>
+                      </div>
+
+                      <div className="flex justify-end space-x-3 mt-auto">
                         <button
-                          className="bg-blue-600 hover:bg-blue-700 rounded-full p-2 flex items-center justify-center"
-                          title="Editar"
                           onClick={() => handleEditClick(item)}
+                          className="bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 rounded-full p-2 shadow-sm border border-gray-200 dark:border-gray-600 transition-colors duration-200"
+                          title="Editar"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-white"
+                            className="h-5 w-5 text-blue-600 dark:text-blue-400"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            strokeWidth={2}
+                            strokeWidth={1.5}
                           >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              d="M15.232 5.232l3.536 3.536M9 13l6-6m2 2l-6 6m-2 2H7a2 2 0 01-2-2v-1.586a1 1 0 01.293-.707l9-9a1 1 0 011.414 0l1.586 1.586a1 1 0 010 1.414l-9 9A1 1 0 017 17z"
+                              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                             />
                           </svg>
                         </button>
-                        {/* Icono Eliminar */}
+
                         <button
-                          className="bg-red-600 hover:bg-red-700 rounded-full p-2 flex items-center justify-center"
+                          className="bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-gray-600 rounded-full p-2 shadow-sm border border-gray-200 dark:border-gray-600 transition-colors duration-200"
                           title="Eliminar"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-white"
+                            className="h-5 w-5 text-red-600 dark:text-red-400"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            strokeWidth={2}
+                            strokeWidth={1.5}
                           >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              d="M6 18L18 6M6 6l12 12"
+                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                             />
                           </svg>
                         </button>
@@ -227,7 +235,7 @@ export default function Dashboard() {
 
         {!loading && bookings.length > 0 && (
           <div className="mt-12 mb-8 relative">
-            <h1 className="text-2xl font-bold mb-4 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400 py-3 tracking-tight drop-shadow-lg">
               Reservas
             </h1>
             <div className="border-b-2 border-gray-200 dark:border-gray-700 mb-6"></div>
@@ -259,25 +267,81 @@ export default function Dashboard() {
                 {bookings.map((item, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-72 dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200"
+                    className="flex-shrink-0 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
-                    <div className="p-4">
-                      <h2 className="text-lg font-semibold mb-2 dark:text-white">
-                        Reserva #{item.id || index}
-                      </h2>
-                      <div className="space-y-2">
-                        <p className="text-gray-600 dark:text-gray-300">
-                          <span className="font-medium">Check-in:</span>{" "}
-                          {item.check_in_date || "No especificado"}
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          <span className="font-medium">Check-out:</span>{" "}
-                          {item.check_out_date || "No especificado"}
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          <span className="font-medium">Huéspedes:</span>{" "}
-                          {item.total_amount || "N/A"}
-                        </p>
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                          Reserva #{item.id || index}
+                        </h2>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center">
+                          <svg
+                            className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                              Check-in:
+                            </span>{" "}
+                            {item.check_in_date || "No especificado"}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center">
+                          <svg
+                            className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                              Check-out:
+                            </span>{" "}
+                            {item.check_out_date || "No especificado"}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center">
+                          <svg
+                            className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                            />
+                          </svg>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                              Huéspedes:
+                            </span>{" "}
+                            {item.total_amount || "N/A"}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -521,13 +585,30 @@ export default function Dashboard() {
       {toast.show && (
         <div
           className={`fixed top-8 left-1/2 transform -translate-x-1/2 z-[9999] px-6 py-3 rounded-lg shadow-lg text-white font-semibold flex items-center gap-2 transition-all
-      ${toast.type === "success" ? "bg-green-600" : toast.type === "error" ? "bg-red-600" : "bg-blue-600"}`}
+      ${
+        toast.type === "success"
+          ? "bg-green-600"
+          : toast.type === "error"
+          ? "bg-red-600"
+          : "bg-blue-600"
+      }`}
           style={{ minWidth: "250px", textAlign: "center" }}
         >
           {/* Icono de manito solo para éxito o info */}
           {(toast.type === "success" || toast.type === "info") && (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11V7a5 5 0 0110 0v4m-5 8v-8m0 8H7a2 2 0 01-2-2v-1.586a1 1 0 01.293-.707l9-9a1 1 0 011.414 0l1.586 1.586a1 1 0 010 1.414l-9 9A1 1 0 017 17z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 inline"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M7 11V7a5 5 0 0110 0v4m-5 8v-8m0 8H7a2 2 0 01-2-2v-1.586a1 1 0 01.293-.707l9-9a1 1 0 011.414 0l1.586 1.586a1 1 0 010 1.414l-9 9A1 1 0 017 17z"
+              />
             </svg>
           )}
           {toast.message}
