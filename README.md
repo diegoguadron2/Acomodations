@@ -8,7 +8,6 @@ Aplicación web moderna para la gestión de reservas y alojamientos, con interfa
   - React.js (o Vue.js - aclarar cuál se usa)
   - Tailwind CSS para estilos
   - React Router para navegación
-- **Backend**: (especificar si hay backend o es solo frontend)
 - **Herramientas**:
   - Vite (o Create React App)
   - ESLint + Prettier
