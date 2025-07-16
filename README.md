@@ -5,7 +5,7 @@ Aplicación web moderna para la gestión de reservas y alojamientos, con interfa
 ## 🚀 Tecnologías utilizadas
 
 - **Frontend**: 
-  - React.js (o Vue.js - aclarar cuál se usa)
+  - Vue.js
   - Tailwind CSS para estilos
   - React Router para navegación
 - **Herramientas**:
@@ -21,7 +21,6 @@ Aplicación web moderna para la gestión de reservas y alojamientos, con interfa
 - Dashboard administrativo
 - Diseño responsive con Tailwind CSS
 - Navegación fluida con React Router
-- Animaciones y transiciones
 
 ## 🛠️ Instalación local
 
